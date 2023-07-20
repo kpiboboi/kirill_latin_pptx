@@ -14,10 +14,10 @@ def reverse_transliterate_presentation(presentation_file):
                         cyrillic_text = translit(latin_text, 'ru')
                         run.text = cyrillic_text
     
-    new_presentation_file = r'C:\Users\s.ibodov\Downloads\tst ppt\Bosh ofis Tashkiliy tuzilma.pptx'
+    new_presentation_file = r'W:\Презентация (янги) 2023.pptx'
     prs.save(new_presentation_file)
 
 # Пример использования:
-presentation_file = r'C:\Users\s.ibodov\Downloads\tst ppt\Bosh ofis Tashkiliy tuzilma.pptx'
+presentation_file = r'W:\Презентация (янги) 2023.pptx'
 reverse_transliterate_presentation(presentation_file)
 print("Done")

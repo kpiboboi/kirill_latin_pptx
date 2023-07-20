@@ -69,13 +69,9 @@ def process_folder(folder_path):
         for file in files:
             if file.endswith('.pptx'):
                 file_path = os.path.join(root, file)
-                success = process_presentation_file(file_path)
-                if success:
-                    print(f"✅ Fayl muvafaqqiyatli o'zgartirildi: {file_path}")
-                else:
-                    print(f"❌ Fayl o'zgartirishida xatolik: {file_path}")
+                process_presentation_file(file_path)
 
 # Natija:
-presentation_folder = r"C:\Users\s.ibodov\Downloads\tst ppt" #Papka manzilini kiriting
+presentation_folder = input("Iltimos, PPTX fayllar joylashgan papkani manzilini kiriting: ")
 process_folder(presentation_folder)
 print("✅✅✅ PPTX fayl kirilchadan lotinchaga muvafaqqiyatli o'girildi ✅✅✅")

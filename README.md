@@ -19,8 +19,6 @@
 
 `PPT cyril to latin.py` dagi kodni olasiz va o'zingizning IDE yingizga qo'yib olishinigiz mumkin)
 
-`presentation_folder` joyiga qo'shtirnoq ichiga fayl bo'gan manzilni yozasiz.
+Keyin kodni "run" qilasiz. So'ngra papka manzilini konsolga kiritasiz
 
-Masalan:
-
-`presentation_folder= "disk\papka\" `
+Masalan: `"disk\papka\" `

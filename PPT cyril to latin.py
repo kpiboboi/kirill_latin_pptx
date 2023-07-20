@@ -13,6 +13,8 @@ def transliterate_word(word):
         "х" : "x", "Х" : "X",
         "ж" : "j", "Ж" : "J",
         "й" : "y", "Й" : "Y",
+        "я" : "ya", "Я" : "Ya",
+        "ц" : "s", "Ц" : "S",
         "ы" : "i", 
         # Добавьте другие замены, если необходимо
     }
@@ -53,6 +55,6 @@ def transliterate_presentation(presentation_file):
     prs.save(presentation_file)
 
 # Пример использования:
-presentation_file = r"C:\Users\s.ibodov\Downloads\tst ppt\test.pptx"
+presentation_file = r"W:\Презентация (янги) 2023.pptx"
 transliterate_presentation(presentation_file)
 print("Готово")

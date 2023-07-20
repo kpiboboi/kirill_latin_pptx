@@ -2,25 +2,41 @@ from pptx import Presentation
 from transliterate import translit
 import re
 
+def transliterate_word(word):
+    translit_rules = {
+        "ю" : "yu", "Ю" : "Yu",
+        "ў" : "o'", "Ў" : "O'",
+        "ё" : "yo", "Ё" : "Yo",
+        "ғ" : "g'", "Ғ" : "G'",
+        "қ" : "q", "Қ" : "Q",
+        "ҳ" : "h", "Ҳ" : "H",
+        "х" : "x", "Х" : "X",
+        "ж" : "j", "Ж" : "J",
+        "й" : "y", "Й" : "Y",
+        "ы" : "i", 
+        # Добавьте другие замены, если необходимо
+    }
+
+    # Заменяем символы в слове согласно правилам
+    for cyrillic_char, latin_char in translit_rules.items():
+        word = word.replace(cyrillic_char, latin_char)
+
+    # Проверяем наличие "е" в начале слова и заменяем на "ye"
+    if word.startswith("е"):
+        if len(word) > 1:
+            word = "ye" + word[1:]
+        else:
+            word = "ye"
+    elif word.startswith("Е"):
+        if len(word) > 1:
+            word = "Ye" + word[1:]
+        else:
+            word = "Ye"
+    return word
+    
+
 def transliterate_presentation(presentation_file):
     prs = Presentation(presentation_file)
-
-    def transliterate_word(word):
-        if word.startswith("е") or word.startswith("Е"):
-            if len(word) > 1:
-                return "ye" + word[1:]
-            else:
-                return "ye"
-        else:
-            translit_rules = {
-                "ю" : "yu",
-                "ў" : "o'",
-                "ё" : "yo",
-                "ғ" : "g'",
-                "ы" : "i",
-                # Добавьте другие замены, если необходимо
-            }
-            return translit(word, "ru", reversed=True, schema=translit_rules)
 
     for slide in prs.slides:
         for shape in slide.shapes:
@@ -32,10 +48,9 @@ def transliterate_presentation(presentation_file):
                         words = re.split(r"(\s+)", cyrillic_text)
                         latin_words = [transliterate_word(word) for word in words]
                         latin_text = "".join(latin_words)
-                        run.text = latin_text
+                        run.text = translit(latin_text, "ru", reversed=True)
 
-    new_presentation_file = r"C:\Users\s.ibodov\Downloads\tst ppt\test.pptx"
-    prs.save(new_presentation_file)
+    prs.save(presentation_file)
 
 # Пример использования:
 presentation_file = r"C:\Users\s.ibodov\Downloads\tst ppt\test.pptx"

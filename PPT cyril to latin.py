@@ -1,6 +1,7 @@
 from pptx import Presentation
 from transliterate import translit
 import re
+import os
 
 def transliterate_word(word):
     translit_rules = {
@@ -16,14 +17,14 @@ def transliterate_word(word):
         "я" : "ya", "Я" : "Ya",
         "ц" : "s", "Ц" : "S",
         "ы" : "i", 
-        # Добавьте другие замены, если необходимо
+        # Agar kerak bo'lsa, boshqa almashtirishlarni qo'shishingiz mumkin
     }
 
-    # Заменяем символы в слове согласно правилам
+    # So'zdagi belgilarni qoidalarga muvofiq almashtiramiz
     for cyrillic_char, latin_char in translit_rules.items():
         word = word.replace(cyrillic_char, latin_char)
 
-    # Проверяем наличие "е" в начале слова и заменяем на "ye"
+    # So'z boshida "e" ni va "ye" bilan almashtiramiz
     if word.startswith("е"):
         if len(word) > 1:
             word = "ye" + word[1:]
@@ -35,7 +36,7 @@ def transliterate_word(word):
         else:
             word = "Ye"
     return word
-    
+pass
 
 def transliterate_presentation(presentation_file):
     prs = Presentation(presentation_file)
@@ -54,7 +55,27 @@ def transliterate_presentation(presentation_file):
 
     prs.save(presentation_file)
 
-# Пример использования:
-presentation_file = r"W:\Презентация (янги) 2023.pptx"
-transliterate_presentation(presentation_file)
-print("Готово")
+def process_presentation_file(file_path):
+    try:
+        transliterate_presentation(file_path)
+        print(f"✅ Fayl muvafaqqiyatli o'zgartirildi: {file_path}")
+        return True  # Возвращаем True в случае успешного выполнения
+    except Exception as e:
+        print(f"❌ Fayl o'zgartirishida xatolik: {file_path}. Sabab: {str(e)}")
+        return False  # Возвращаем False в случае ошибки
+
+def process_folder(folder_path):
+    for root, dirs, files in os.walk(folder_path):
+        for file in files:
+            if file.endswith('.pptx'):
+                file_path = os.path.join(root, file)
+                success = process_presentation_file(file_path)
+                if success:
+                    print(f"✅ Fayl muvafaqqiyatli o'zgartirildi: {file_path}")
+                else:
+                    print(f"❌ Fayl o'zgartirishida xatolik: {file_path}")
+
+# Natija:
+presentation_folder = r"C:\Users\s.ibodov\Downloads\tst ppt" #Papka manzilini kiriting
+process_folder(presentation_folder)
+print("✅✅✅ PPTX fayl kirilchadan lotinchaga muvafaqqiyatli o'girildi ✅✅✅")

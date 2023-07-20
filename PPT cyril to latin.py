@@ -59,10 +59,10 @@ def process_presentation_file(file_path):
     try:
         transliterate_presentation(file_path)
         print(f"✅ Fayl muvafaqqiyatli o'zgartirildi: {file_path}")
-        return True  # Возвращаем True в случае успешного выполнения
+        return True  # Muvaffaqiyatli bo'lsa, True qaytaradi
     except Exception as e:
         print(f"❌ Fayl o'zgartirishida xatolik: {file_path}. Sabab: {str(e)}")
-        return False  # Возвращаем False в случае ошибки
+        return False  # Muvaffaqiyatli bo'lmasa, False qaytaradi
 
 def process_folder(folder_path):
     for root, dirs, files in os.walk(folder_path):

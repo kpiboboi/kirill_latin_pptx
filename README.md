@@ -23,4 +23,4 @@
 
 Masalan:
 
-`presentation_folder= "disk/papka/" `
+`presentation_folder= "disk\papka\" `
